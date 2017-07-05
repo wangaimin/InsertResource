@@ -82,12 +82,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\AuditNode_Resource.cs" />
     <Compile Include="Entity\BidTool_TenderBidStatusItem_Resource.cs" />
     <Compile Include="Entity\EntityBase.cs" />
     <Compile Include="Entity\SupplierCategory_Resource.cs" />
     <Compile Include="Entity\SystemArea_Resource.cs" />
     <Compile Include="Entity\SystemCategory_Resource.cs" />
+    <Compile Include="Entity\SystemMenu_Resource.cs" />
     <Compile Include="Entity\SystemOrganization_Resource.cs" />
+    <Compile Include="Entity\SystemTagRole.cs" />
+    <Compile Include="Entity\SystemTagRole_Resource.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

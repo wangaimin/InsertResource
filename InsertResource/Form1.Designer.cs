@@ -37,6 +37,12 @@
             this.btnSystemArea_Resource = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbDBConfig = new System.Windows.Forms.TextBox();
+            this.btnSystemTagRole = new System.Windows.Forms.Button();
+            this.btnSystemTagRoleForQA = new System.Windows.Forms.Button();
+            this.btnSystemMenu_Resource = new System.Windows.Forms.Button();
+            this.btnSystemMenu_ResourceQA = new System.Windows.Forms.Button();
+            this.btnAuditNode_Resource = new System.Windows.Forms.Button();
+            this.btnAuditNode_ResourceQA = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSelect
@@ -128,11 +134,77 @@
             this.tbDBConfig.Text = " data source=localhost;database=YZ_Operation\r\n;user id=sa;password=yzw@123;Timeou" +
     "t=30;";
             // 
+            // btnSystemTagRole
+            // 
+            this.btnSystemTagRole.Location = new System.Drawing.Point(108, 434);
+            this.btnSystemTagRole.Name = "btnSystemTagRole";
+            this.btnSystemTagRole.Size = new System.Drawing.Size(191, 72);
+            this.btnSystemTagRole.TabIndex = 23;
+            this.btnSystemTagRole.Text = "导入角色类型资源";
+            this.btnSystemTagRole.UseVisualStyleBackColor = true;
+            this.btnSystemTagRole.Click += new System.EventHandler(this.btSystemTagRole_Click);
+            // 
+            // btnSystemTagRoleForQA
+            // 
+            this.btnSystemTagRoleForQA.Location = new System.Drawing.Point(108, 537);
+            this.btnSystemTagRoleForQA.Name = "btnSystemTagRoleForQA";
+            this.btnSystemTagRoleForQA.Size = new System.Drawing.Size(191, 72);
+            this.btnSystemTagRoleForQA.TabIndex = 24;
+            this.btnSystemTagRoleForQA.Text = "导入角色类型资源(QA,PRE)";
+            this.btnSystemTagRoleForQA.UseVisualStyleBackColor = true;
+            this.btnSystemTagRoleForQA.Click += new System.EventHandler(this.btSystemTagRoleForQA_Click);
+            // 
+            // btnSystemMenu_Resource
+            // 
+            this.btnSystemMenu_Resource.Location = new System.Drawing.Point(324, 434);
+            this.btnSystemMenu_Resource.Name = "btnSystemMenu_Resource";
+            this.btnSystemMenu_Resource.Size = new System.Drawing.Size(191, 72);
+            this.btnSystemMenu_Resource.TabIndex = 25;
+            this.btnSystemMenu_Resource.Text = "导入菜单资源";
+            this.btnSystemMenu_Resource.UseVisualStyleBackColor = true;
+            this.btnSystemMenu_Resource.Click += new System.EventHandler(this.btnSystemMenu_Resource_Click);
+            // 
+            // btnSystemMenu_ResourceQA
+            // 
+            this.btnSystemMenu_ResourceQA.Location = new System.Drawing.Point(324, 537);
+            this.btnSystemMenu_ResourceQA.Name = "btnSystemMenu_ResourceQA";
+            this.btnSystemMenu_ResourceQA.Size = new System.Drawing.Size(191, 72);
+            this.btnSystemMenu_ResourceQA.TabIndex = 26;
+            this.btnSystemMenu_ResourceQA.Text = "导入菜单资源（QA,PRE）";
+            this.btnSystemMenu_ResourceQA.UseVisualStyleBackColor = true;
+            this.btnSystemMenu_ResourceQA.Click += new System.EventHandler(this.btnSystemMenu_ResourceQA_Click);
+            // 
+            // btnAuditNode_Resource
+            // 
+            this.btnAuditNode_Resource.Location = new System.Drawing.Point(553, 434);
+            this.btnAuditNode_Resource.Name = "btnAuditNode_Resource";
+            this.btnAuditNode_Resource.Size = new System.Drawing.Size(191, 72);
+            this.btnAuditNode_Resource.TabIndex = 27;
+            this.btnAuditNode_Resource.Text = "导入审批节点";
+            this.btnAuditNode_Resource.UseVisualStyleBackColor = true;
+            this.btnAuditNode_Resource.Click += new System.EventHandler(this.btnAuditNode_Resource_Click);
+            // 
+            // btnAuditNode_ResourceQA
+            // 
+            this.btnAuditNode_ResourceQA.Location = new System.Drawing.Point(553, 537);
+            this.btnAuditNode_ResourceQA.Name = "btnAuditNode_ResourceQA";
+            this.btnAuditNode_ResourceQA.Size = new System.Drawing.Size(191, 72);
+            this.btnAuditNode_ResourceQA.TabIndex = 28;
+            this.btnAuditNode_ResourceQA.Text = "导入审批节点（QA,PRE）";
+            this.btnAuditNode_ResourceQA.UseVisualStyleBackColor = true;
+            this.btnAuditNode_ResourceQA.Click += new System.EventHandler(this.btnAuditNode_ResourceQA_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1297, 543);
+            this.ClientSize = new System.Drawing.Size(1745, 824);
+            this.Controls.Add(this.btnAuditNode_ResourceQA);
+            this.Controls.Add(this.btnAuditNode_Resource);
+            this.Controls.Add(this.btnSystemMenu_ResourceQA);
+            this.Controls.Add(this.btnSystemMenu_Resource);
+            this.Controls.Add(this.btnSystemTagRoleForQA);
+            this.Controls.Add(this.btnSystemTagRole);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbDBConfig);
             this.Controls.Add(this.btnSystemArea_Resource);
@@ -160,6 +232,12 @@
         private System.Windows.Forms.Button btnSystemArea_Resource;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbDBConfig;
+        private System.Windows.Forms.Button btnSystemTagRole;
+        private System.Windows.Forms.Button btnSystemTagRoleForQA;
+        private System.Windows.Forms.Button btnSystemMenu_Resource;
+        private System.Windows.Forms.Button btnSystemMenu_ResourceQA;
+        private System.Windows.Forms.Button btnAuditNode_Resource;
+        private System.Windows.Forms.Button btnAuditNode_ResourceQA;
     }
 }
 
