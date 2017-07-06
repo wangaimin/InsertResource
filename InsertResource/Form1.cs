@@ -15,6 +15,11 @@ namespace InsertResource
 {
     public partial class Form1 : Form
     {
+
+        private string filePath;
+        private string dbConfig;
+        private string languageCode;
+
         public Form1()
         {
             InitializeComponent();
@@ -366,32 +371,30 @@ namespace InsertResource
 
         private void btSystemTagRoleForQA_Click(object sender, EventArgs e)
         {
-            string path = tbResource.Text.Trim();
-
-            if (tbDBConfig.Text.Trim() == "")
+            if (!CheckData())
             {
-                MessageBox.Show("数据库地址不能为空！");
-                return;
-            }
-            if (path.IndexOf(".xlsx") <= 0)
-            {
-                MessageBox.Show("请选择正确的excel");
                 return;
             }
 
-            string insertSql = @"INSERT INTO [YZ_AuthCenter].[dbo].[SystemTagRole_Resource]
-                                               ([RoleSysNo]
-                                               ,[LanguageCode]
-                                               ,[RoleName])
-                                         VALUES
-                                               (@RoleSysNo
-                                               ,@LanguageCode
-                                               ,@RoleName)";
+            //string insertSql = @"INSERT INTO [YZ_AuthCenter].[dbo].[SystemTagRole_Resource]
+            //                                   ([RoleSysNo]
+            //                                   ,[LanguageCode]
+            //                                   ,[RoleName])
+            //                             VALUES
+            //                                   (@RoleSysNo
+            //                                   ,@LanguageCode
+            //                                   ,@RoleName)";
+
+            string updateSql = @"UPDATE    [YZ_AuthCenter].[dbo].[SystemTagRole_Resource]
+                                      SET 
+                                           [RoleName] = @RoleName
+                                     WHERE RoleSysNo=@RoleSysNo AND LanguageCode=@LanguageCode";
+
 
             string querySql = "SELECT [SysNo] AS RoleSysNo ,[RoleName] AS RoleName_zh_cn FROM [YZ_AuthCenter].[dbo].[SystemTagRole] WITH(NOLOCK)";
 
 
-            var mapper = new Mapper(path);
+            var mapper = new Mapper(filePath);
             var resultData = mapper.Take<SystemTagRole_Resource>(0);
             Dictionary<string, SystemTagRole_Resource> dicDistinctName = new Dictionary<string, SystemTagRole_Resource>();
             resultData.Select(m => m.Value).ForEach(m =>
@@ -409,13 +412,19 @@ namespace InsertResource
             }
 
 
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(dbConfig))
             {
                 conn.Open();
                 var systemTagRole_Resource = conn.Query<SystemTagRole_Resource>(querySql);
+                if (systemTagRole_Resource.Count() == 0)
+                {
+                    MessageBox.Show("资源表中无数据可修改！");
+                    return;
+                }
+                var result = systemTagRole_Resource.Where(m =>dicDistinctName.ContainsKey(m.RoleName_zh_cn));
 
                 dicDistinctName.ForEach(m=> {
-                    systemTagRole_Resource.Where(str => str.RoleName_zh_cn.Equals(m.Key)).ForEach(str=> 
+                    result.Where(str => str.RoleName_zh_cn.Equals(m.Key)).ForEach(str=> 
                     {
                         str.RoleName = m.Value.RoleName.Trim();
                         str.LanguageCode = m.Value.LanguageCode;
@@ -423,9 +432,8 @@ namespace InsertResource
                     );
                 });
 
-                var result = systemTagRole_Resource.Where(m=>m.RoleName!="");
 
-                conn.Execute(insertSql, result);
+                conn.Execute(updateSql, result);
             }
             MessageBox.Show("成功");
         }
@@ -477,32 +485,29 @@ namespace InsertResource
 
         private void btnSystemMenu_ResourceQA_Click(object sender, EventArgs e)
         {
-            string path = tbResource.Text.Trim();
-
-            if (tbDBConfig.Text.Trim() == "")
+            if (!CheckData())
             {
-                MessageBox.Show("数据库地址不能为空！");
-                return;
-            }
-            if (path.IndexOf(".xlsx") <= 0)
-            {
-                MessageBox.Show("请选择正确的excel");
                 return;
             }
 
-            string insertSql = @"INSERT INTO [YZ_AuthCenter].[dbo].[SystemMenu_Resource]
-                                               ([MenuSysNo]
-                                               ,[LanguageCode]
-                                               ,[MenuName])
-                                         VALUES
-                                               (@MenuSysNo
-                                               ,@LanguageCode
-                                               ,@MenuName)";
+
+            //string insertSql = @"INSERT INTO [YZ_AuthCenter].[dbo].[SystemMenu_Resource]
+            //                                   ([MenuSysNo]
+            //                                   ,[LanguageCode]
+            //                                   ,[MenuName])
+            //                             VALUES
+            //                                   (@MenuSysNo
+            //                                   ,@LanguageCode
+            //                                   ,@MenuName)";
+            string updateSql = @"UPDATE    [YZ_AuthCenter].[dbo].[SystemMenu_Resource]
+                                      SET 
+                                           [MenuName] = @MenuName
+                                     WHERE MenuSysNo=@MenuSysNo AND LanguageCode=@LanguageCode";
 
             string querySql = "SELECT [SysNo] AS MenuSysNo ,[MenuName] AS MenuName_zh_cn FROM [YZ_AuthCenter].[dbo].[SystemMenu] WITH(NOLOCK)";
 
 
-            var mapper = new Mapper(path);
+            var mapper = new Mapper(filePath);
             var resultData = mapper.Take<SystemMenu_Resource>(0);
             Dictionary<string, SystemMenu_Resource> dicDistinctName = new Dictionary<string, SystemMenu_Resource>();
             resultData.Select(m => m.Value).ForEach(m =>
@@ -520,23 +525,26 @@ namespace InsertResource
             }
 
 
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(dbConfig))
             {
                 conn.Open();
                 var systemMenu_Resource = conn.Query<SystemMenu_Resource>(querySql);
+                if (systemMenu_Resource.Count() == 0)
+                {
+                    MessageBox.Show("资源表中无数据可修改！");
+                    return;
+                }
+                var result = systemMenu_Resource.Where(m => dicDistinctName.ContainsKey(m.MenuName_zh_cn));
 
                 dicDistinctName.ForEach(m => {
-                    systemMenu_Resource.Where(str => str.MenuName_zh_cn.Equals(m.Key)).ForEach(str =>
+                    result.Where(str => str.MenuName_zh_cn.Equals(m.Key)).ForEach(str =>
                     {
                         str.MenuName = m.Value.MenuName.Trim();
                         str.LanguageCode = m.Value.LanguageCode;
                     }
                     );
                 });
-
-                var result = systemMenu_Resource.Where(m => m.MenuName != "");
-
-                conn.Execute(insertSql, result);
+                conn.Execute(updateSql, result);
             }
             MessageBox.Show("成功");
 
@@ -595,34 +603,33 @@ namespace InsertResource
 
         private void btnAuditNode_ResourceQA_Click(object sender, EventArgs e)
         {
-            string path = tbResource.Text.Trim();
-
-            if (tbDBConfig.Text.Trim() == "")
+            if (!CheckData())
             {
-                MessageBox.Show("数据库地址不能为空！");
-                return;
-            }
-            if (path.IndexOf(".xlsx") <= 0)
-            {
-                MessageBox.Show("请选择正确的excel");
                 return;
             }
 
-            string insertSql = @"INSERT INTO [YZ_Audit].[dbo].[AuditNode_Resource]
-                                               ([NodeSysNo]
-                                               ,[LanguageCode]
-                                               ,[NodeName]
-                                               ,[ApplicationName])
-                                         VALUES
-                                               (@NodeSysNo
-                                               ,@LanguageCode
-                                               ,@NodeName
-                                               ,@ApplicationName)";
+
+            //string insertSql = @"INSERT INTO [YZ_Audit].[dbo].[AuditNode_Resource]
+            //                                   ([NodeSysNo]
+            //                                   ,[LanguageCode]
+            //                                   ,[NodeName]
+            //                                   ,[ApplicationName])
+            //                             VALUES
+            //                                   (@NodeSysNo
+            //                                   ,@LanguageCode
+            //                                   ,@NodeName
+            //                                   ,@ApplicationName)";
+
+            string updateSql = @"UPDATE    [YZ_Audit].[dbo].[AuditNode_Resource]
+                                      SET 
+                                           [NodeName] = @NodeName
+                                          ,[ApplicationName] = @ApplicationName
+                                     WHERE NodeSysNo=@NodeSysNo AND LanguageCode=@LanguageCode";
 
             string querySql = "SELECT [SysNo] AS NodeSysNo ,[NodeName] AS NodeName_zh_cn FROM [YZ_Audit].[dbo].[AuditNode] WITH(NOLOCK)";
 
 
-            var mapper = new Mapper(path);
+            var mapper = new Mapper(filePath);
             var resultData = mapper.Take<AuditNode_Resource>(0);
             Dictionary<string, AuditNode_Resource> dicDistinctName = new Dictionary<string, AuditNode_Resource>();
             resultData.Select(m => m.Value).ForEach(m =>
@@ -639,14 +646,20 @@ namespace InsertResource
                 return;
             }
 
-
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            
+            using (IDbConnection conn = new SqlConnection(dbConfig))
             {
                 conn.Open();
                 var auditNode_Resource = conn.Query<AuditNode_Resource>(querySql);
+                if (auditNode_Resource.Count() == 0)
+                {
+                    MessageBox.Show("资源表中无数据可修改！");
+                    return;
+                }
+                var result = auditNode_Resource.Where(m =>dicDistinctName.ContainsKey( m.NodeName_zh_cn));
 
                 dicDistinctName.ForEach(m => {
-                    auditNode_Resource.Where(str => str.NodeName_zh_cn.Equals(m.Key)).ForEach(str =>
+                    result.Where(str => str.NodeName_zh_cn.Equals(m.Key)).ForEach(str =>
                     {
                         str.NodeName = m.Value.NodeName.Trim();
                         str.ApplicationName = m.Value.ApplicationName.Trim();
@@ -655,9 +668,205 @@ namespace InsertResource
                     );
                 });
 
-                var result = auditNode_Resource.Where(m => m.NodeName != "");
+                conn.Execute(updateSql, result);
+            }
+            MessageBox.Show("成功");
+        }
 
-                conn.Execute(insertSql, result);
+        private void btnSystemCategoryByName_Click(object sender, EventArgs e)
+        {
+            if (!CheckData())
+            {
+                return;
+            }
+
+            //string insertSql = @"INSERT INTO [YZ_Operation].[dbo].[SystemCategory_Resource]
+            //                       ([SystemCategorySysNo]
+            //                       ,[LanguageCode]
+            //                       ,[CategoryName]
+            //                       ,[InUserSysNo]
+            //                       ,[InUserName]
+            //                       ,[InDate]
+            //                       ,[EditUserSysNo]
+            //                       ,[EditUserName]
+            //                       ,[EditDate])
+            //                 VALUES
+            //                       (@SystemCategorySysNo
+            //                       ,@LanguageCode
+            //                       ,@CategoryName
+            //                        ,0
+            //                       ,'王爱民'
+            //                       ,GetDate()
+            //                       , 0
+            //                       , '王爱民'
+            //                       , GetDate())";
+
+            string updateSql = @"UPDATE    [YZ_Operation].[dbo].[SystemCategory_Resource]
+                                      SET 
+                                           [CategoryName] = @CategoryName
+                                          ,[EditUserSysNo] =0
+                                          ,[EditUserName] = '王爱民'
+                                          ,[EditDate] = GETDATE()
+                                     WHERE SystemCategorySysNo=@SystemCategorySysNo AND LanguageCode=@LanguageCode";
+
+            string querySql = "SELECT [SysNo] AS SystemCategorySysNo ,[CategoryName] FROM [YZ_Operation].[dbo].[SystemCategory] WITH(NOLOCK)";
+
+
+            var mapper = new Mapper(filePath);
+            var resultData = mapper.Take<DataComm>(0);
+            Dictionary<string, DataComm> dicDistinctName = new Dictionary<string, DataComm>();
+            resultData.Select(m => m.Value).ForEach(m =>
+            {
+                if (!dicDistinctName.ContainsKey(m.Name_zh_cn))
+                {
+                    dicDistinctName.Add(m.Name_zh_cn, m);
+                }
+            });
+
+            if (dicDistinctName.Count() == 0)
+            {
+                MessageBox.Show("请选择正确的excel！");
+                return;
+            }
+
+
+            using (IDbConnection conn = new SqlConnection(dbConfig))
+            {
+                conn.Open();
+                var queryResult = conn.Query<SystemCategory_Resource>(querySql);
+                if (queryResult.Count()==0)
+                {
+                    MessageBox.Show("资源表中无数据可修改！");
+                    return;
+                }
+
+                var result = queryResult.Where(m => dicDistinctName.ContainsKey(m.CategoryName)).ToList();
+
+
+                dicDistinctName.ForEach(m => {
+                    result.Where(str => str.CategoryName.Equals(m.Key)).ForEach(str =>
+                    {
+                        str.CategoryName = string.IsNullOrWhiteSpace(m.Value.Name_update)?m.Value.Name:m.Value.Name_update;
+                        str.LanguageCode = m.Value.LanguageCode;
+                    }
+                    );
+                });
+
+                conn.Execute(updateSql, result);
+            }
+            MessageBox.Show("成功");
+
+        }
+
+        /// <summary>
+        /// 验证
+        /// </summary>
+        /// <param name="isDB">是否为数据库翻译</param>
+        /// <returns></returns>
+        private bool CheckData()
+        {
+
+            dbConfig = tbDBConfig.Text.Trim();
+            if (dbConfig=="")
+            {
+                MessageBox.Show("数据库地址不能为空！");
+                return false;
+            }
+
+            filePath = tbResource.Text.Trim();
+            if (filePath.IndexOf(".xlsx") <= 0)
+            {
+                MessageBox.Show("请选择正确的excel");
+                return false;
+            }
+
+            //languageCode = tbLanguageCode.Text.Trim();
+            //if (languageCode == "")
+            //{
+            //    MessageBox.Show("语言代码不能为空！");
+            //    return false;
+            //}
+            return true;
+        }
+
+        private void btnSupplierCategory_ResourceByName_Click(object sender, EventArgs e)
+        {
+            if (!CheckData())
+            {
+                return;
+            }
+
+            //string insertSql = @"INSERT INTO [YZ_Operation].[dbo].[SystemCategory_Resource]
+            //                       ([SystemCategorySysNo]
+            //                       ,[LanguageCode]
+            //                       ,[CategoryName]
+            //                       ,[InUserSysNo]
+            //                       ,[InUserName]
+            //                       ,[InDate]
+            //                       ,[EditUserSysNo]
+            //                       ,[EditUserName]
+            //                       ,[EditDate])
+            //                 VALUES
+            //                       (@SystemCategorySysNo
+            //                       ,@LanguageCode
+            //                       ,@CategoryName
+            //                        ,0
+            //                       ,'王爱民'
+            //                       ,GetDate()
+            //                       , 0
+            //                       , '王爱民'
+            //                       , GetDate())";
+
+            string updateSql = @"UPDATE    [YZ_Supplier].[dbo].[SupplierCategory_Resource]
+                                      SET 
+                                           [CategoryName] = @CategoryName
+                                          ,[EditUserSysNo] =0
+                                          ,[EditUserName] = '王爱民'
+                                          ,[EditDate] = GETDATE()
+                                     WHERE SupplierCategorySysNo=@SupplierCategorySysNo AND LanguageCode=@LanguageCode";
+
+            string querySql = "SELECT [SysNo] AS SupplierCategorySysNo ,[CategoryName] FROM [YZ_Supplier].[dbo].[SupplierCategory] WITH(NOLOCK)";
+
+
+            var mapper = new Mapper(filePath);
+            var resultData = mapper.Take<DataComm>(0);
+            Dictionary<string, DataComm> dicDistinctName = new Dictionary<string, DataComm>();
+            resultData.Select(m => m.Value).ForEach(m =>
+            {
+                if (!dicDistinctName.ContainsKey(m.Name_zh_cn))
+                {
+                    dicDistinctName.Add(m.Name_zh_cn, m);
+                }
+            });
+
+            if (dicDistinctName.Count() == 0)
+            {
+                MessageBox.Show("请选择正确的excel！");
+                return;
+            }
+
+
+            using (IDbConnection conn = new SqlConnection(dbConfig))
+            {
+                conn.Open();
+                var queryResult = conn.Query<SupplierCategory_Resource>(querySql);
+                if (queryResult.Count() == 0)
+                {
+                    MessageBox.Show("资源表中无数据可修改！");
+                    return;
+                }
+
+                var result = queryResult.Where(m => dicDistinctName.ContainsKey(m.CategoryName)).ToList();
+
+                dicDistinctName.ForEach(m => {
+                    result.Where(str => str.CategoryName.Equals(m.Key)).ForEach(str =>
+                    {
+                        str.CategoryName = string.IsNullOrWhiteSpace(m.Value.Name_update) ? m.Value.Name : m.Value.Name_update;
+                        str.LanguageCode = m.Value.LanguageCode;
+                    }
+                    );
+                });
+                conn.Execute(updateSql, result);
             }
             MessageBox.Show("成功");
         }
