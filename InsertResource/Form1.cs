@@ -870,5 +870,64 @@ namespace InsertResource
             }
             MessageBox.Show("成功");
         }
+
+        private void btnSystemFunction_Click(object sender, EventArgs e)
+        {
+            if (!CheckData())
+            {
+                return;
+            }
+
+            string updateSql = @"UPDATE    [YZ_AuthCenter].[dbo].[SystemFunction_Resource]
+                                      SET 
+                                           [FunctionName] = @FunctionName
+                                     WHERE FunctionSysNo=@FunctionSysNo AND LanguageCode=@LanguageCode";
+
+            string querySql = "SELECT [SysNo] AS FunctionSysNo ,[FunctionName] FROM [YZ_AuthCenter].[dbo].[SystemFunction] WITH(NOLOCK)";
+
+
+            var mapper = new Mapper(filePath);
+            var resultData = mapper.Take<DataComm>(0);
+            Dictionary<string, DataComm> dicDistinctName = new Dictionary<string, DataComm>();
+            resultData.Select(m => m.Value).ForEach(m =>
+            {
+                if (!dicDistinctName.ContainsKey(m.Name_zh_cn))
+                {
+                    dicDistinctName.Add(m.Name_zh_cn, m);
+                }
+            });
+
+            if (dicDistinctName.Count() == 0)
+            {
+                MessageBox.Show("请选择正确的excel！");
+                return;
+            }
+
+
+            using (IDbConnection conn = new SqlConnection(dbConfig))
+            {
+                conn.Open();
+                var queryResult = conn.Query<SystemFunction_Resource>(querySql);
+                if (queryResult.Count() == 0)
+                {
+                    MessageBox.Show("资源表中无数据可修改！");
+                    return;
+                }
+
+                var result = queryResult.Where(m => dicDistinctName.ContainsKey(m.FunctionName)).ToList();
+
+                dicDistinctName.ForEach(m => {
+                    result.Where(str => str.FunctionName.Equals(m.Key)).ForEach(str =>
+                    {
+                        str.FunctionName = string.IsNullOrWhiteSpace(m.Value.Name_update) ? m.Value.Name : m.Value.Name_update;
+                        str.LanguageCode = m.Value.LanguageCode;
+                    }
+                    );
+                });
+                conn.Execute(updateSql, result);
+            }
+            MessageBox.Show("成功");
+
+        }
     }
 }

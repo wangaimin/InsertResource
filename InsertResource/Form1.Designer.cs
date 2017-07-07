@@ -45,6 +45,7 @@
             this.btnSystemCategoryByName = new System.Windows.Forms.Button();
             this.btnSupplierCategory_ResourceByName = new System.Windows.Forms.Button();
             this.tbDBConfig = new System.Windows.Forms.TextBox();
+            this.btnSystemFunction = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSelect
@@ -215,11 +216,22 @@
             this.tbDBConfig.TabIndex = 21;
             this.tbDBConfig.Text = " data source=.;database=YZ_Operation\r\n;user id=sa;password=yzw@123;Timeout=30;";
             // 
+            // btnSystemFunction
+            // 
+            this.btnSystemFunction.Location = new System.Drawing.Point(526, 398);
+            this.btnSystemFunction.Name = "btnSystemFunction";
+            this.btnSystemFunction.Size = new System.Drawing.Size(191, 72);
+            this.btnSystemFunction.TabIndex = 36;
+            this.btnSystemFunction.Text = "更新功能权限";
+            this.btnSystemFunction.UseVisualStyleBackColor = true;
+            this.btnSystemFunction.Click += new System.EventHandler(this.btnSystemFunction_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1859, 892);
+            this.Controls.Add(this.btnSystemFunction);
             this.Controls.Add(this.btnSupplierCategory_ResourceByName);
             this.Controls.Add(this.btnSystemCategoryByName);
             this.Controls.Add(this.btnAuditNode_ResourceQA);
@@ -263,6 +275,7 @@
         private System.Windows.Forms.Button btnSystemCategoryByName;
         private System.Windows.Forms.Button btnSupplierCategory_ResourceByName;
         private System.Windows.Forms.TextBox tbDBConfig;
+        private System.Windows.Forms.Button btnSystemFunction;
     }
 }
 

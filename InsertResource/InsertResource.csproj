@@ -89,6 +89,7 @@
     <Compile Include="Entity\SupplierCategory_Resource.cs" />
     <Compile Include="Entity\SystemArea_Resource.cs" />
     <Compile Include="Entity\SystemCategory_Resource.cs" />
+    <Compile Include="Entity\SystemFunction_Resource.cs" />
     <Compile Include="Entity\SystemMenu_Resource.cs" />
     <Compile Include="Entity\SystemOrganization_Resource.cs" />
     <Compile Include="Entity\SystemTagRole.cs" />
