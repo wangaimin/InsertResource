@@ -35,7 +35,7 @@
             this.btnBidTool_TenderBidStatusItem_Resource = new System.Windows.Forms.Button();
             this.btnSystemOrganization_Resource = new System.Windows.Forms.Button();
             this.btnSystemArea_Resource = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.t = new System.Windows.Forms.Label();
             this.btnSystemTagRole = new System.Windows.Forms.Button();
             this.btnSystemTagRoleForQA = new System.Windows.Forms.Button();
             this.btnSystemMenu_Resource = new System.Windows.Forms.Button();
@@ -44,13 +44,15 @@
             this.btnAuditNode_ResourceQA = new System.Windows.Forms.Button();
             this.btnSystemCategoryByName = new System.Windows.Forms.Button();
             this.btnSupplierCategory_ResourceByName = new System.Windows.Forms.Button();
-            this.tbDBConfig = new System.Windows.Forms.TextBox();
+            this.tbWriteDB = new System.Windows.Forms.TextBox();
             this.btnSystemFunction = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbReadDB = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(83, 140);
+            this.btnSelect.Location = new System.Drawing.Point(83, 213);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(191, 72);
             this.btnSelect.TabIndex = 0;
@@ -60,7 +62,7 @@
             // 
             // tbResource
             // 
-            this.tbResource.Location = new System.Drawing.Point(326, 140);
+            this.tbResource.Location = new System.Drawing.Point(326, 213);
             this.tbResource.Multiline = true;
             this.tbResource.Name = "tbResource";
             this.tbResource.Size = new System.Drawing.Size(858, 72);
@@ -69,7 +71,7 @@
             // 
             // btnSupplierCategory_Resource
             // 
-            this.btnSupplierCategory_Resource.Location = new System.Drawing.Point(311, 303);
+            this.btnSupplierCategory_Resource.Location = new System.Drawing.Point(311, 376);
             this.btnSupplierCategory_Resource.Name = "btnSupplierCategory_Resource";
             this.btnSupplierCategory_Resource.Size = new System.Drawing.Size(191, 72);
             this.btnSupplierCategory_Resource.TabIndex = 2;
@@ -79,7 +81,7 @@
             // 
             // btnSystemCategory_Resource
             // 
-            this.btnSystemCategory_Resource.Location = new System.Drawing.Point(83, 303);
+            this.btnSystemCategory_Resource.Location = new System.Drawing.Point(83, 376);
             this.btnSystemCategory_Resource.Name = "btnSystemCategory_Resource";
             this.btnSystemCategory_Resource.Size = new System.Drawing.Size(191, 72);
             this.btnSystemCategory_Resource.TabIndex = 3;
@@ -89,7 +91,7 @@
             // 
             // btnBidTool_TenderBidStatusItem_Resource
             // 
-            this.btnBidTool_TenderBidStatusItem_Resource.Location = new System.Drawing.Point(526, 303);
+            this.btnBidTool_TenderBidStatusItem_Resource.Location = new System.Drawing.Point(526, 376);
             this.btnBidTool_TenderBidStatusItem_Resource.Name = "btnBidTool_TenderBidStatusItem_Resource";
             this.btnBidTool_TenderBidStatusItem_Resource.Size = new System.Drawing.Size(191, 72);
             this.btnBidTool_TenderBidStatusItem_Resource.TabIndex = 4;
@@ -99,7 +101,7 @@
             // 
             // btnSystemOrganization_Resource
             // 
-            this.btnSystemOrganization_Resource.Location = new System.Drawing.Point(747, 303);
+            this.btnSystemOrganization_Resource.Location = new System.Drawing.Point(747, 376);
             this.btnSystemOrganization_Resource.Name = "btnSystemOrganization_Resource";
             this.btnSystemOrganization_Resource.Size = new System.Drawing.Size(191, 72);
             this.btnSystemOrganization_Resource.TabIndex = 5;
@@ -109,7 +111,7 @@
             // 
             // btnSystemArea_Resource
             // 
-            this.btnSystemArea_Resource.Location = new System.Drawing.Point(967, 303);
+            this.btnSystemArea_Resource.Location = new System.Drawing.Point(967, 376);
             this.btnSystemArea_Resource.Name = "btnSystemArea_Resource";
             this.btnSystemArea_Resource.Size = new System.Drawing.Size(191, 72);
             this.btnSystemArea_Resource.TabIndex = 6;
@@ -117,19 +119,19 @@
             this.btnSystemArea_Resource.UseVisualStyleBackColor = true;
             this.btnSystemArea_Resource.Click += new System.EventHandler(this.btnSystemArea_Resource_Click);
             // 
-            // label2
+            // t
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(79, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(193, 30);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "数据库地址：";
+            this.t.AutoSize = true;
+            this.t.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.t.Location = new System.Drawing.Point(79, 115);
+            this.t.Name = "t";
+            this.t.Size = new System.Drawing.Size(148, 30);
+            this.t.TabIndex = 22;
+            this.t.Text = "WriteDB：";
             // 
             // btnSystemTagRole
             // 
-            this.btnSystemTagRole.Location = new System.Drawing.Point(81, 534);
+            this.btnSystemTagRole.Location = new System.Drawing.Point(81, 607);
             this.btnSystemTagRole.Name = "btnSystemTagRole";
             this.btnSystemTagRole.Size = new System.Drawing.Size(191, 72);
             this.btnSystemTagRole.TabIndex = 23;
@@ -139,7 +141,7 @@
             // 
             // btnSystemTagRoleForQA
             // 
-            this.btnSystemTagRoleForQA.Location = new System.Drawing.Point(81, 637);
+            this.btnSystemTagRoleForQA.Location = new System.Drawing.Point(81, 710);
             this.btnSystemTagRoleForQA.Name = "btnSystemTagRoleForQA";
             this.btnSystemTagRoleForQA.Size = new System.Drawing.Size(191, 72);
             this.btnSystemTagRoleForQA.TabIndex = 24;
@@ -149,7 +151,7 @@
             // 
             // btnSystemMenu_Resource
             // 
-            this.btnSystemMenu_Resource.Location = new System.Drawing.Point(297, 534);
+            this.btnSystemMenu_Resource.Location = new System.Drawing.Point(297, 607);
             this.btnSystemMenu_Resource.Name = "btnSystemMenu_Resource";
             this.btnSystemMenu_Resource.Size = new System.Drawing.Size(191, 72);
             this.btnSystemMenu_Resource.TabIndex = 25;
@@ -159,7 +161,7 @@
             // 
             // btnSystemMenu_ResourceQA
             // 
-            this.btnSystemMenu_ResourceQA.Location = new System.Drawing.Point(297, 637);
+            this.btnSystemMenu_ResourceQA.Location = new System.Drawing.Point(297, 710);
             this.btnSystemMenu_ResourceQA.Name = "btnSystemMenu_ResourceQA";
             this.btnSystemMenu_ResourceQA.Size = new System.Drawing.Size(191, 72);
             this.btnSystemMenu_ResourceQA.TabIndex = 26;
@@ -169,7 +171,7 @@
             // 
             // btnAuditNode_Resource
             // 
-            this.btnAuditNode_Resource.Location = new System.Drawing.Point(526, 534);
+            this.btnAuditNode_Resource.Location = new System.Drawing.Point(526, 607);
             this.btnAuditNode_Resource.Name = "btnAuditNode_Resource";
             this.btnAuditNode_Resource.Size = new System.Drawing.Size(191, 72);
             this.btnAuditNode_Resource.TabIndex = 27;
@@ -179,7 +181,7 @@
             // 
             // btnAuditNode_ResourceQA
             // 
-            this.btnAuditNode_ResourceQA.Location = new System.Drawing.Point(526, 637);
+            this.btnAuditNode_ResourceQA.Location = new System.Drawing.Point(526, 710);
             this.btnAuditNode_ResourceQA.Name = "btnAuditNode_ResourceQA";
             this.btnAuditNode_ResourceQA.Size = new System.Drawing.Size(191, 72);
             this.btnAuditNode_ResourceQA.TabIndex = 28;
@@ -189,7 +191,7 @@
             // 
             // btnSystemCategoryByName
             // 
-            this.btnSystemCategoryByName.Location = new System.Drawing.Point(84, 398);
+            this.btnSystemCategoryByName.Location = new System.Drawing.Point(84, 471);
             this.btnSystemCategoryByName.Name = "btnSystemCategoryByName";
             this.btnSystemCategoryByName.Size = new System.Drawing.Size(191, 72);
             this.btnSystemCategoryByName.TabIndex = 29;
@@ -199,7 +201,7 @@
             // 
             // btnSupplierCategory_ResourceByName
             // 
-            this.btnSupplierCategory_ResourceByName.Location = new System.Drawing.Point(311, 398);
+            this.btnSupplierCategory_ResourceByName.Location = new System.Drawing.Point(311, 471);
             this.btnSupplierCategory_ResourceByName.Name = "btnSupplierCategory_ResourceByName";
             this.btnSupplierCategory_ResourceByName.Size = new System.Drawing.Size(191, 72);
             this.btnSupplierCategory_ResourceByName.TabIndex = 35;
@@ -207,18 +209,19 @@
             this.btnSupplierCategory_ResourceByName.UseVisualStyleBackColor = true;
             this.btnSupplierCategory_ResourceByName.Click += new System.EventHandler(this.btnSupplierCategory_ResourceByName_Click);
             // 
-            // tbDBConfig
+            // tbWriteDB
             // 
-            this.tbDBConfig.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbDBConfig.Location = new System.Drawing.Point(326, 30);
-            this.tbDBConfig.Name = "tbDBConfig";
-            this.tbDBConfig.Size = new System.Drawing.Size(858, 42);
-            this.tbDBConfig.TabIndex = 21;
-            this.tbDBConfig.Text = " data source=.;database=YZ_Operation\r\n;user id=sa;password=yzw@123;Timeout=30;";
+            this.tbWriteDB.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbWriteDB.Location = new System.Drawing.Point(326, 103);
+            this.tbWriteDB.Name = "tbWriteDB";
+            this.tbWriteDB.Size = new System.Drawing.Size(858, 42);
+            this.tbWriteDB.TabIndex = 21;
+            this.tbWriteDB.Text = " data source=172.16.0.252,14335;database=YZ_AuthCenter\r\n;user id=sa;password=yzw@" +
+    "123;Timeout=30;";
             // 
             // btnSystemFunction
             // 
-            this.btnSystemFunction.Location = new System.Drawing.Point(526, 398);
+            this.btnSystemFunction.Location = new System.Drawing.Point(526, 471);
             this.btnSystemFunction.Name = "btnSystemFunction";
             this.btnSystemFunction.Size = new System.Drawing.Size(191, 72);
             this.btnSystemFunction.TabIndex = 36;
@@ -226,11 +229,33 @@
             this.btnSystemFunction.UseVisualStyleBackColor = true;
             this.btnSystemFunction.Click += new System.EventHandler(this.btnSystemFunction_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(79, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(133, 30);
+            this.label1.TabIndex = 38;
+            this.label1.Text = "ReadDB：";
+            // 
+            // tbReadDB
+            // 
+            this.tbReadDB.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbReadDB.Location = new System.Drawing.Point(326, 34);
+            this.tbReadDB.Name = "tbReadDB";
+            this.tbReadDB.Size = new System.Drawing.Size(858, 42);
+            this.tbReadDB.TabIndex = 37;
+            this.tbReadDB.Text = " data source=172.16.0.252,14335;database=YZ_AuthCenter\r\n;user id=sa;password=yzw@" +
+    "123;Timeout=30;";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1859, 892);
+            this.ClientSize = new System.Drawing.Size(1886, 1169);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbReadDB);
             this.Controls.Add(this.btnSystemFunction);
             this.Controls.Add(this.btnSupplierCategory_ResourceByName);
             this.Controls.Add(this.btnSystemCategoryByName);
@@ -240,8 +265,8 @@
             this.Controls.Add(this.btnSystemMenu_Resource);
             this.Controls.Add(this.btnSystemTagRoleForQA);
             this.Controls.Add(this.btnSystemTagRole);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbDBConfig);
+            this.Controls.Add(this.t);
+            this.Controls.Add(this.tbWriteDB);
             this.Controls.Add(this.btnSystemArea_Resource);
             this.Controls.Add(this.btnSystemOrganization_Resource);
             this.Controls.Add(this.btnBidTool_TenderBidStatusItem_Resource);
@@ -265,7 +290,7 @@
         private System.Windows.Forms.Button btnBidTool_TenderBidStatusItem_Resource;
         private System.Windows.Forms.Button btnSystemOrganization_Resource;
         private System.Windows.Forms.Button btnSystemArea_Resource;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label t;
         private System.Windows.Forms.Button btnSystemTagRole;
         private System.Windows.Forms.Button btnSystemTagRoleForQA;
         private System.Windows.Forms.Button btnSystemMenu_Resource;
@@ -274,8 +299,10 @@
         private System.Windows.Forms.Button btnAuditNode_ResourceQA;
         private System.Windows.Forms.Button btnSystemCategoryByName;
         private System.Windows.Forms.Button btnSupplierCategory_ResourceByName;
-        private System.Windows.Forms.TextBox tbDBConfig;
+        private System.Windows.Forms.TextBox tbWriteDB;
         private System.Windows.Forms.Button btnSystemFunction;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbReadDB;
     }
 }
 

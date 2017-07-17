@@ -17,7 +17,8 @@ namespace InsertResource
     {
 
         private string filePath;
-        private string dbConfig;
+        private string dbWriteConfig;
+        private string dbReadConfig;
         private string languageCode;
 
         public Form1()
@@ -30,7 +31,7 @@ namespace InsertResource
 
             string path = tbResource.Text.Trim();
 
-            if (tbDBConfig.Text.Trim() == "")
+            if (tbWriteDB.Text.Trim() == "")
             {
                 MessageBox.Show("数据库地址不能为空！");
                 return;
@@ -76,7 +77,7 @@ namespace InsertResource
                                    , 0
                                    , '王爱民'
                                    , GetDate())";
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(tbWriteDB.Text.Trim()))
             {
                 conn.Open();
                 conn.Execute(insertSql, systemCategory_ResourceList);
@@ -100,7 +101,7 @@ namespace InsertResource
 
             string path = tbResource.Text.Trim();
 
-            if (tbDBConfig.Text.Trim() == "")
+            if (tbWriteDB.Text.Trim() == "")
             {
                 MessageBox.Show("数据库地址不能为空！");
                 return;
@@ -147,7 +148,7 @@ namespace InsertResource
                                    , 0
                                    , '王爱民'
                                    , GetDate())";
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(tbWriteDB.Text.Trim()))
             {
                 conn.Open();
                 conn.Execute(insertSql, supplierCategory_Resource);
@@ -159,7 +160,7 @@ namespace InsertResource
         {
             string path = tbResource.Text.Trim();
 
-            if (tbDBConfig.Text.Trim() == "")
+            if (tbWriteDB.Text.Trim() == "")
             {
                 MessageBox.Show("数据库地址不能为空！");
                 return;
@@ -196,7 +197,7 @@ namespace InsertResource
                                    ,@LanguageCode
                                    ,@NoticeContent
                                    )";
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(tbWriteDB.Text.Trim()))
             {
                 conn.Open();
                 conn.Execute(insertSql, bidTool_TenderBidStatusItem_Resource);
@@ -208,7 +209,7 @@ namespace InsertResource
         {
             string path = tbResource.Text.Trim();
 
-            if (tbDBConfig.Text.Trim() == "")
+            if (tbWriteDB.Text.Trim() == "")
             {
                 MessageBox.Show("数据库地址不能为空！");
                 return;
@@ -255,7 +256,7 @@ namespace InsertResource
                                    , 0
                                    , '王爱民'
                                    , GetDate())";
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(tbWriteDB.Text.Trim()))
             {
                 conn.Open();
                 conn.Execute(insertSql, systemArea_Resource);
@@ -267,7 +268,7 @@ namespace InsertResource
         {
             string path = tbResource.Text.Trim();
 
-            if (tbDBConfig.Text.Trim() == "")
+            if (tbWriteDB.Text.Trim() == "")
             {
                 MessageBox.Show("数据库地址不能为空！");
                 return;
@@ -317,7 +318,7 @@ namespace InsertResource
                                    , @EditUserSysNo
                                    , @EditUserName
                                    , @EditDate)";
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(tbWriteDB.Text.Trim()))
             {
                 conn.Open();
                 conn.Execute(insertSql, systemOrganization_Resource);
@@ -329,7 +330,7 @@ namespace InsertResource
         {
             string path = tbResource.Text.Trim();
 
-            if (tbDBConfig.Text.Trim() == "")
+            if (tbWriteDB.Text.Trim() == "")
             {
                 MessageBox.Show("数据库地址不能为空！");
                 return;
@@ -361,7 +362,7 @@ namespace InsertResource
                                                (@RoleSysNo
                                                ,@LanguageCode
                                                ,@RoleName)";
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(tbWriteDB.Text.Trim()))
             {
                 conn.Open();
                 conn.Execute(insertSql, systemTagRole_Resource);
@@ -412,7 +413,7 @@ namespace InsertResource
             }
 
 
-            using (IDbConnection conn = new SqlConnection(dbConfig))
+            using (IDbConnection conn = new SqlConnection(dbReadConfig))
             {
                 conn.Open();
                 var systemTagRole_Resource = conn.Query<SystemTagRole_Resource>(querySql);
@@ -421,10 +422,11 @@ namespace InsertResource
                     MessageBox.Show("资源表中无数据可修改！");
                     return;
                 }
-                var result = systemTagRole_Resource.Where(m =>dicDistinctName.ContainsKey(m.RoleName_zh_cn));
+                var result = systemTagRole_Resource.Where(m => dicDistinctName.ContainsKey(m.RoleName_zh_cn));
 
-                dicDistinctName.ForEach(m=> {
-                    result.Where(str => str.RoleName_zh_cn.Equals(m.Key)).ForEach(str=> 
+                dicDistinctName.ForEach(m =>
+                {
+                    result.Where(str => str.RoleName_zh_cn.Equals(m.Key)).ForEach(str =>
                     {
                         str.RoleName = m.Value.RoleName.Trim();
                         str.LanguageCode = m.Value.LanguageCode;
@@ -442,7 +444,7 @@ namespace InsertResource
         {
             string path = tbResource.Text.Trim();
 
-            if (tbDBConfig.Text.Trim() == "")
+            if (tbWriteDB.Text.Trim() == "")
             {
                 MessageBox.Show("数据库地址不能为空！");
                 return;
@@ -474,7 +476,7 @@ namespace InsertResource
                                                (@MenuSysNo
                                                ,@LanguageCode
                                                ,@MenuName)";
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(tbWriteDB.Text.Trim()))
             {
                 conn.Open();
                 conn.Execute(insertSql, systemMenu_Resource);
@@ -525,7 +527,7 @@ namespace InsertResource
             }
 
 
-            using (IDbConnection conn = new SqlConnection(dbConfig))
+            using (IDbConnection conn = new SqlConnection(dbReadConfig))
             {
                 conn.Open();
                 var systemMenu_Resource = conn.Query<SystemMenu_Resource>(querySql);
@@ -536,7 +538,8 @@ namespace InsertResource
                 }
                 var result = systemMenu_Resource.Where(m => dicDistinctName.ContainsKey(m.MenuName_zh_cn));
 
-                dicDistinctName.ForEach(m => {
+                dicDistinctName.ForEach(m =>
+                {
                     result.Where(str => str.MenuName_zh_cn.Equals(m.Key)).ForEach(str =>
                     {
                         str.MenuName = m.Value.MenuName.Trim();
@@ -554,7 +557,7 @@ namespace InsertResource
         {
             string path = tbResource.Text.Trim();
 
-            if (tbDBConfig.Text.Trim() == "")
+            if (tbWriteDB.Text.Trim() == "")
             {
                 MessageBox.Show("数据库地址不能为空！");
                 return;
@@ -592,7 +595,7 @@ namespace InsertResource
                                                ,@LanguageCode
                                                ,@NodeName
                                                ,@ApplicationName)";
-            using (IDbConnection conn = new SqlConnection(tbDBConfig.Text.Trim()))
+            using (IDbConnection conn = new SqlConnection(tbWriteDB.Text.Trim()))
             {
                 conn.Open();
                 conn.Execute(insertSql, auditNode_Resource);
@@ -646,8 +649,8 @@ namespace InsertResource
                 return;
             }
 
-            
-            using (IDbConnection conn = new SqlConnection(dbConfig))
+
+            using (IDbConnection conn = new SqlConnection(dbReadConfig))
             {
                 conn.Open();
                 var auditNode_Resource = conn.Query<AuditNode_Resource>(querySql);
@@ -656,9 +659,10 @@ namespace InsertResource
                     MessageBox.Show("资源表中无数据可修改！");
                     return;
                 }
-                var result = auditNode_Resource.Where(m =>dicDistinctName.ContainsKey( m.NodeName_zh_cn));
+                var result = auditNode_Resource.Where(m => dicDistinctName.ContainsKey(m.NodeName_zh_cn));
 
-                dicDistinctName.ForEach(m => {
+                dicDistinctName.ForEach(m =>
+                {
                     result.Where(str => str.NodeName_zh_cn.Equals(m.Key)).ForEach(str =>
                     {
                         str.NodeName = m.Value.NodeName.Trim();
@@ -680,27 +684,6 @@ namespace InsertResource
                 return;
             }
 
-            //string insertSql = @"INSERT INTO [YZ_Operation].[dbo].[SystemCategory_Resource]
-            //                       ([SystemCategorySysNo]
-            //                       ,[LanguageCode]
-            //                       ,[CategoryName]
-            //                       ,[InUserSysNo]
-            //                       ,[InUserName]
-            //                       ,[InDate]
-            //                       ,[EditUserSysNo]
-            //                       ,[EditUserName]
-            //                       ,[EditDate])
-            //                 VALUES
-            //                       (@SystemCategorySysNo
-            //                       ,@LanguageCode
-            //                       ,@CategoryName
-            //                        ,0
-            //                       ,'王爱民'
-            //                       ,GetDate()
-            //                       , 0
-            //                       , '王爱民'
-            //                       , GetDate())";
-
             string updateSql = @"UPDATE    [YZ_Operation].[dbo].[SystemCategory_Resource]
                                       SET 
                                            [CategoryName] = @CategoryName
@@ -711,6 +694,7 @@ namespace InsertResource
 
             string querySql = "SELECT [SysNo] AS SystemCategorySysNo ,[CategoryName] FROM [YZ_Operation].[dbo].[SystemCategory] WITH(NOLOCK)";
 
+            IEnumerable<SystemCategory_Resource> result;
 
             var mapper = new Mapper(filePath);
             var resultData = mapper.Take<DataComm>(0);
@@ -729,33 +713,37 @@ namespace InsertResource
                 return;
             }
 
-
-            using (IDbConnection conn = new SqlConnection(dbConfig))
+            //读
+            using (IDbConnection conn = new SqlConnection(dbReadConfig))
             {
                 conn.Open();
                 var queryResult = conn.Query<SystemCategory_Resource>(querySql);
-                if (queryResult.Count()==0)
+                if (queryResult.Count() == 0)
                 {
                     MessageBox.Show("资源表中无数据可修改！");
                     return;
                 }
 
-                var result = queryResult.Where(m => dicDistinctName.ContainsKey(m.CategoryName)).ToList();
+                result = queryResult.Where(m => dicDistinctName.ContainsKey(m.CategoryName)).ToList();
 
-
-                dicDistinctName.ForEach(m => {
+                dicDistinctName.ForEach(m =>
+                {
                     result.Where(str => str.CategoryName.Equals(m.Key)).ForEach(str =>
                     {
-                        str.CategoryName = string.IsNullOrWhiteSpace(m.Value.Name_update)?m.Value.Name:m.Value.Name_update;
+                        str.CategoryName = string.IsNullOrWhiteSpace(m.Value.Name_update) ? m.Value.Name : m.Value.Name_update;
                         str.LanguageCode = m.Value.LanguageCode;
                     }
                     );
                 });
+            }
 
+            //写
+            using (IDbConnection conn = new SqlConnection(dbWriteConfig))
+            {
+                conn.Open();
                 conn.Execute(updateSql, result);
             }
             MessageBox.Show("成功");
-
         }
 
         /// <summary>
@@ -766,10 +754,16 @@ namespace InsertResource
         private bool CheckData()
         {
 
-            dbConfig = tbDBConfig.Text.Trim();
-            if (dbConfig=="")
+            dbReadConfig = tbReadDB.Text.Trim();
+            if (dbReadConfig == "")
             {
-                MessageBox.Show("数据库地址不能为空！");
+                MessageBox.Show("ReadDB不能为空！");
+                return false;
+            }
+            dbWriteConfig = tbWriteDB.Text.Trim();
+            if (dbWriteConfig == "")
+            {
+                MessageBox.Show("WriteDB不能为空！");
                 return false;
             }
 
@@ -796,27 +790,6 @@ namespace InsertResource
                 return;
             }
 
-            //string insertSql = @"INSERT INTO [YZ_Operation].[dbo].[SystemCategory_Resource]
-            //                       ([SystemCategorySysNo]
-            //                       ,[LanguageCode]
-            //                       ,[CategoryName]
-            //                       ,[InUserSysNo]
-            //                       ,[InUserName]
-            //                       ,[InDate]
-            //                       ,[EditUserSysNo]
-            //                       ,[EditUserName]
-            //                       ,[EditDate])
-            //                 VALUES
-            //                       (@SystemCategorySysNo
-            //                       ,@LanguageCode
-            //                       ,@CategoryName
-            //                        ,0
-            //                       ,'王爱民'
-            //                       ,GetDate()
-            //                       , 0
-            //                       , '王爱民'
-            //                       , GetDate())";
-
             string updateSql = @"UPDATE    [YZ_Supplier].[dbo].[SupplierCategory_Resource]
                                       SET 
                                            [CategoryName] = @CategoryName
@@ -827,7 +800,7 @@ namespace InsertResource
 
             string querySql = "SELECT [SysNo] AS SupplierCategorySysNo ,[CategoryName] FROM [YZ_Supplier].[dbo].[SupplierCategory] WITH(NOLOCK)";
 
-
+            IEnumerable<SupplierCategory_Resource> result;
             var mapper = new Mapper(filePath);
             var resultData = mapper.Take<DataComm>(0);
             Dictionary<string, DataComm> dicDistinctName = new Dictionary<string, DataComm>();
@@ -845,8 +818,7 @@ namespace InsertResource
                 return;
             }
 
-
-            using (IDbConnection conn = new SqlConnection(dbConfig))
+            using (IDbConnection conn = new SqlConnection(dbReadConfig))
             {
                 conn.Open();
                 var queryResult = conn.Query<SupplierCategory_Resource>(querySql);
@@ -856,9 +828,10 @@ namespace InsertResource
                     return;
                 }
 
-                var result = queryResult.Where(m => dicDistinctName.ContainsKey(m.CategoryName)).ToList();
+                result = queryResult.Where(m => dicDistinctName.ContainsKey(m.CategoryName)).ToList();
 
-                dicDistinctName.ForEach(m => {
+                dicDistinctName.ForEach(m =>
+                {
                     result.Where(str => str.CategoryName.Equals(m.Key)).ForEach(str =>
                     {
                         str.CategoryName = string.IsNullOrWhiteSpace(m.Value.Name_update) ? m.Value.Name : m.Value.Name_update;
@@ -866,6 +839,12 @@ namespace InsertResource
                     }
                     );
                 });
+            }
+
+            //写
+            using (IDbConnection conn = new SqlConnection(dbWriteConfig))
+            {
+                conn.Open();
                 conn.Execute(updateSql, result);
             }
             MessageBox.Show("成功");
@@ -904,7 +883,7 @@ namespace InsertResource
             }
 
 
-            using (IDbConnection conn = new SqlConnection(dbConfig))
+            using (IDbConnection conn = new SqlConnection(dbReadConfig))
             {
                 conn.Open();
                 var queryResult = conn.Query<SystemFunction_Resource>(querySql);
@@ -916,7 +895,8 @@ namespace InsertResource
 
                 var result = queryResult.Where(m => dicDistinctName.ContainsKey(m.FunctionName)).ToList();
 
-                dicDistinctName.ForEach(m => {
+                dicDistinctName.ForEach(m =>
+                {
                     result.Where(str => str.FunctionName.Equals(m.Key)).ForEach(str =>
                     {
                         str.FunctionName = string.IsNullOrWhiteSpace(m.Value.Name_update) ? m.Value.Name : m.Value.Name_update;
